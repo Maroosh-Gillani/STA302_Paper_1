@@ -15,5 +15,5 @@ library(tidyverse)
 #### Simulate data ####
 # [...ADD CODE HERE...]
 
-
-
+# Potentially gonna use this dataset: https://open.toronto.ca/dataset/neighbourhood-crime-rates/
+# Idk take the count of each crime per year and see how it goes up or down and form a conclusion based on that

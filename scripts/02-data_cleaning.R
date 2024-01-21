@@ -1,5 +1,5 @@
 #### Preamble ####
-# Purpose: Cleans the raw data recorded by two observers..... [...UPDATE THIS...]
+# Purpose: Cleans the raw data recorded by OpenDataToronto's Neighbourhood Crime Rates dataset
 # Author: Maroosh Gillani
 # Date: 19 January 2024
 # Contact: maroosh.gillani@mail.utoronto.ca

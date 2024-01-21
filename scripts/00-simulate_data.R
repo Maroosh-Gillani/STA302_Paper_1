@@ -21,21 +21,21 @@ set.seed(777) # Ensures reproducibility
 
 # Simulating data for bike thefts from 2014 to 2023
 bike_theft_data <- data.frame(
-  year = 2014:2019,
+  Year = 2014:2019,
   theft_count = round(rnorm(6, mean = 500, sd = 100))
 )
 
 # Increase in 2020 due to COVID
-bike_theft_data <- bind_rows(bike_theft_data, data.frame(year = 2020, theft_count = round(rnorm(1, mean = 550, sd = 100))))
+bike_theft_data <- bind_rows(bike_theft_data, data.frame(Year = 2020, theft_count = round(rnorm(1, mean = 550, sd = 100))))
 
 # 2021
-bike_theft_data <- bind_rows(bike_theft_data, data.frame(year = 2021, theft_count = round(rnorm(1, mean = 500, sd = 100))))
+bike_theft_data <- bind_rows(bike_theft_data, data.frame(Year = 2021, theft_count = round(rnorm(1, mean = 500, sd = 100))))
 
 # Increase in 2022 due to inflation
-bike_theft_data <- bind_rows(bike_theft_data, data.frame(year = 2022, theft_count = round(rnorm(1, mean = 580, sd = 100))))
+bike_theft_data <- bind_rows(bike_theft_data, data.frame(Year = 2022, theft_count = round(rnorm(1, mean = 580, sd = 100))))
 
 # Increase in 2023 due to inflation
-bike_theft_data <- bind_rows(bike_theft_data, data.frame(year = 2023, theft_count = round(rnorm(1, mean = 600, sd = 100))))
+bike_theft_data <- bind_rows(bike_theft_data, data.frame(Year = 2023, theft_count = round(rnorm(1, mean = 600, sd = 100))))
 
 
 

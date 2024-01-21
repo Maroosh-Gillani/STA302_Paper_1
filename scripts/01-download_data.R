@@ -4,7 +4,7 @@
 # Date: 19 January 2024
 # Contact: maroosh.gillani@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: Non
+# Pre-requisites: None
 
 
 #### Workspace setup ####
@@ -27,4 +27,4 @@ datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'
 data <- filter(datastore_resources, row_number()==1) %>% get_resource()
 
 #### Save data ####
-write_csv(x=data, file="inputs/data/raw_data.csv") 
+write_csv(x=data, file="inputs/data/unedited_data.csv") 

@@ -11,7 +11,7 @@ library(tidyverse)
 library(dplyr)
 
 #### Clean data ####
-raw_data <- read_csv("inputs/data/raw_data.csv")
+raw_data <- read_csv("inputs/data/unedited_data.csv")
 
 # Select the columns AUTOTHEFT_2014 - AUTOTHEFT_2023 and BIKETHEFT_2014 - BIKETHEFT_2023 only
 columns_to_keep <- c(

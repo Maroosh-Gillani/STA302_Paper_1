@@ -2,13 +2,11 @@
 title: "The Relationship Between Bike and Automobile Thefts in Toronto (2014-2023)"
 author: "Maroosh Gillani"
 thanks: "Code and data are available at: https://github.com/Maroosh-Gillani/toronto-bike-and-auto-thefts "
-date: "21 January 2024"
+date: "23 January 2024"
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence." ########### UPDATE THIS ############
+abstract: "This study examines a decade of bike and automobile thefts in Toronto, revealing patterns and potential socio-economic correlations. The analysis emphasizes the need for targeted strategies to address the prevailing trend of rising transportation-related crimes in the city."
 format: pdf
 number-sections: true
-execute: 
-  echo: false
 bibliography: references.bib
 ---
 
@@ -46,20 +44,27 @@ total_auto_thefts <-
 
 # Introduction
 
-
+In a city renowned for its vibrant diversity and various activities, Toronto residents embrace a broad spectrum of transportation modes, with automobiles and bicycles standing out prominently. However, the unfortunate reality of urban life, especially in a city of this scale, is the prevalence of theft. This study delves into a decade-long analysis of bike and automobile thefts in Toronto, seeking to discern patterns and potential links to socio-economic factors. Furthermore, the investigation aims to unveil any existing relationships between automobile and bike thefts, with the ultimate objective of offering valuable insights to mitigate the escalating trend of transportation-related crimes in the city of Toronto, and its surrounding neighbourhoods.
 
 # Data and Dataset
 
+This paper uses data from OpenDataToronto [@opendatatoronto], which is the city of Toronto's digital data, available to be freely used by anyone. In particular, I am using the "Neighbourhood Crime Rates" dataset, which includes crime data by neighbourhood. My focus is on analyzing Toronto's bike and automobile thefts from the dataset, which I have isolated from the wider dataset in my cleaning process. It must be noted that a minor issue with this dataset is that it is missing theft data for a small number of neighbourhoods at certain years. Thus I have also omitted those neighbourhoods from this analysis. Nevertheless, the provided dataset remains adequate for examining the correlation between bike and automobile thefts and offers the opportunity to formulate hypotheses to explain the observed patterns in the data. I do not believe that similar datasets
+
+To help me analyze, simulate, clean and visualize the data, I have used R [@citeR], and the following packages: here [@here], janitor [@janitor], and tidyverse [@tidyverse].
 
 
 # Variables of Interest
 
-
+The variables of interest are the Years (2014 - 2023), and the Quantity of Thefts (total thefts per year) for bikes and automobiles. The Years are the independent variable on the x-axis, and the Quantity of Thefts are the dependent variables on the y-axis. 
 
 # Data Visualization
 
+## Toronto Bike Thefts per Year
+
+From 2014 to 2023, a total of 34,527 bikes were reported to have been theft across 152 of Toronto's neighbourhoods. The highest number of bike thefts occurred in the year 2018, with 3952 reported cases, closely followed by the years 2020 and 2017, with 3888 and 3853 Thefts respectively. In contrast, 2022 experienced the least amount of bike thefts, at 2,925 reports. The second lowest number of thefts reported at 3000 were in 2023. The breakdown for the number of bikes stolen each year from 2014 to 2023 can be seen in @fig-1.
+
 ```{r graph1, fig.cap="Number of Bike Thefts in Toronto from 2014 - 2023", echo=FALSE}
-#| label: figure-1
+#| label: fig-1
 
 # total bikes theft graphed
 total_bike_thefts %>%
@@ -69,10 +74,12 @@ total_bike_thefts %>%
   theme_minimal() +
   labs(x = "Year", y = "Number of Bike Thefts")
 ```
-Some analysis about bike thefts...
+## Toronto Automobile Thefts per Year
+
+As for automobile thefts,  a total of 56,403 incidents occurred across the same 152 neighbourhoods in Toronto during the 10-year period. Automobile thefts peaked in 2023, with 11,728 cases reported. This was a significant increase from 2022, the year with the second most reported automobile thefts at 9430. In comparison, 2015 and 2016 experienced the least amount of automobile theft cases, at 3182 and 3245 reports respectively. The distribution of automobile thefts annually from 2014 to 2023 is depicted in @fig-2.
 
 ```{r graph2, fig.cap="Number of Automobile Thefts in Toronto from 2014 - 2023", echo=FALSE}
-#| label: figure-2
+#| label: fig-2
 
 # total automobiles theft graphed
 total_auto_thefts %>%
@@ -82,16 +89,12 @@ total_auto_thefts %>%
   theme_minimal() +
   labs(x = "Year", y = "Number of Automobile Thefts")
 ```
-Some analysis about automobile thefts
+## Comparison of Automobiles and Bikes Theft per Year
 
-https://www150.statcan.gc.ca/n1/pub/36-28-0001/2023006/article/00002-eng.htm
-Above link says Canada has been facing bad inflation from early 2022. We also see sharp spike in thefts 2022 and 2023. A factor could be car theft and reselling more lucrative amid inflation, and perhaps more people need money so resorting to crime.
-
-https://www.theglobeandmail.com/drive/mobility/article-average-price-of-a-new-car-tops-66000-as-drivers-wrestle-with-a-very/#:~:text=Globe%20and%20Mail-,Average%20price%20of%20a%20new%20car%20tops%20%2466%2C000%20as,with%20'a%20very%20surprising%20reality'&text=Brace%20yourself.,ca's%20price%20index%20report.
-average car price increase in 2023 can also be a reason for highest thefts in 2023
+@fig-3 below shows the 2 distributions graphed in @fig-1 and @fig-2 side-by-side. It is clear to see that automobile theft reports have exhibited a positive trend almost every year. In contrast, bike thefts have seemed to stay relatively constant across the 10 year span in Toronto. Interestingly enough, the three years with the most incidents of automobile thefts (2021, 2022 and 2023) are also the years with the least amount of stolen bikes.
 
 ```{r graph3, fig.cap="Side by Side Comparison of The Number of Bike and Automobile Thefts", echo=FALSE}
-#| label: figure-3
+#| label: fig-3
 
 # Combine both data frames
 combined_data <- bind_rows(
@@ -108,16 +111,19 @@ combined_data %>%
   labs(x = "Year", y = "Number of Thefts") +
   scale_fill_manual(values = c("Bike" = "navy", "Auto" = "dark red"))  # Customize fill colors
 ```
-Some analysis about the bike thefts in contrast to auto thefts...
 
-Source comparing car and bike thefts: https://www.smartsign.com/blog/thieves-in-transport-a-side-by-side-comparison-of-bike-car-thieves/#:~:text=In%20fact%2C%20bicycle%20owners%20are,it%20is%20not%20adequately%20locked.
+## Discussion
 
-bike thefts lowest when car thefts highest, thieves lazy don't wanna do physical activity with bikes lol
+@fig-2 shows that automobile thefts have consistently increased from 2015 to 2023, with surges in 2022 and 2023 particularly, bringing into question the elements contributing to this trend. One factor could be that according to Petrina Gentile [@source2], the average price of a car in Canada has increased in 2023. The mean cost of vehicles has increased 21% from 2022 to 2023, and 47% over a time period of 4 years, to an average price of $66,000. This notable increase in price over a relatively short amount of time could be a possible explanation, as car thieves would likely find reselling these cars to be a more lucrative business. Another factor which is closely tied to the increasing prices is that of inflation. Weimin Wang from Statistics Canada [@source1] reveals that "Canada has been experiencing high inflation starting in early 2022". Not only does inflation mean increased prices for vehicles and vehicle parts, it also indicates an economic downturn for the average Canadian citizen. Studies have shown that difficult economic conditions can lead to the commitment of more crimes [@source4]. These two could also be plausible factors contributing towards the strong rise of automobile theft crimes in 2022 and 2023.
+
+The economic difficulties discussed above could also be a reason for why bike thefts slightly peaked in 2020, as seen in @fig-1, as that was the height of the COVID-19 pandemic and lock down scenarios across Toronto and all of Canada. However, bike theft crimes have remained relatively stable over the 10-year time period from which the data is taken, thus more data and factors must be considered before reaching a definitive conclusion.
+
+@fig-3 illustrates the comparison between automobile and bike thefts, and reveals intriguing dynamics. According to Miller [@source3], bike owners are 3 times more likely to experience bike theft compared to car owners experiencing car theft. However, the graph shows that this is clearly not the case in Toronto, where over the last 10 years, the number of car thefts are a little under twice as much as bike thefts. However, Miller [@source3] also highlights that 75% of bike thefts are attributed to quick transportation purposes; where a bike is ridden from " point A to point B and then abandoned", and this scenario seems to be common in college and university campuses. Thus, bike thefts also end up having a higher recovery rate, which might lead to less people formally reporting such incidents. Toronto and its neighbourhoods being home to various universities could be a reason why bike theft statistics are lower when compared to automobile thefts. 
+
+The inverse relationship between automobile and bike thefts in 2021, 2022, and 2023 is also interesting. However, it is unlikely that bike thefts and automobile thefts are committed by the same criminals due to the differing skill-sets and difficulty associated with these two crimes. Thus, further research and analysis needs to be conducted to ascertain if this pattern holds any weight, or if it is just a coincidence.
 
 # Conclusion
 
-
+In conclusion, the examination of bike and automobile theft data in Toronto from 2014 to 2023 reveals patterns that are possibly influenced by various socio-economic factors. The surge in automobile thefts in 2022 and 2023 aligns with Canadian inflation and average car price increases, suggesting a correlation between economic conditions and criminal behavior, while the inverse relationship between bike and automobile thefts challenges convention. Thus, this study highlights the importance of developing strategies to address the persistent increase in automobile thefts. Additionally, further research investigating the relationship between bike and automobile thefts is essential to determine whether insights gained from the observed decline in bike thefts over recent years can inform effective measures for reducing automobile theft rates.
 
 # References
-
-
